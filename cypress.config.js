@@ -7,6 +7,6 @@ module.exports = defineConfig({
     },
     projectId: "CypressShopBook",
     baseUrl: "https://practice.automationtesting.in/",
-    specPattern: "./cypress/test/*/**.*"
+    specPattern: "./cypress/test/**.*"
   },
 });
