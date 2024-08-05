@@ -41,7 +41,7 @@ class MyAccountPage {
         if (password !== ''){
             this.registerForm.txtPassword().type(password);
         }
-        this.loginForm.btnRegister().click();
+        this.registerForm.btnRegister().click();
     };
 
     verifyTextErrorMessage(message){
