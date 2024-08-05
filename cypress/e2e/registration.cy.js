@@ -1,7 +1,7 @@
 import myAccountPage from "../pages/myAccountPage";
+import {faker} from "@faker-js/faker";
 
 const regData =require( "../fixtures/registrationData.json");
-
 describe('My Account - Registration', () => {
 
     beforeEach(() => {
@@ -9,7 +9,9 @@ describe('My Account - Registration', () => {
     });
 
     it('1. Registration - Sign in', () => {
-        // myAccountPage.register("","");
+        let newEmail = faker.internet.email();
+        myAccountPage.register(newEmail,"ChungND@AutomationTest1991");
+        myAccountPage.verifyLoginSuccessful();
     });
 
     regData.forEach((data) => {
