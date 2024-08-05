@@ -16,8 +16,14 @@ class MyAccountPage {
     }
 
     login(username,password){
-        this.loginForm.txtUsername().type(username);
-        this.loginForm.txtPassword().type(password);
+        if (username !== ''){
+            this.loginForm.txtUsername().type(username);
+        }
+
+        if (password !== ''){
+            this.loginForm.txtPassword().type(password);
+        }
+
         this.loginForm.btnLogin().click();
     };
 
