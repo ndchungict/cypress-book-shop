@@ -1,0 +1,30 @@
+[
+  {
+    "tc_id": "2",
+    "tc_name": "Registration with invalid email",
+    "email": "chungnd@invalidEmail",
+    "password": "AutomationTest@1991",
+    "message": "Error: Please provide a valid email address."
+  },
+  {
+    "tc_id": "3",
+    "tc_name": "Registration with empty email",
+    "email": "",
+    "password": "AutomationTest@1991",
+    "message": "Error: Please provide a valid email address."
+  },
+  {
+    "tc_id": "4",
+    "tc_name": "Registration with empty password",
+    "email": "chungnd@valid.email.com",
+    "password": "",
+    "message": "Error: Please enter an account password."
+  },
+  {
+    "tc_id": "5",
+    "tc_name": "Registration with empty email and password",
+    "email": "",
+    "password": "",
+    "message": "Error: Please provide a valid email address."
+  }
+]
