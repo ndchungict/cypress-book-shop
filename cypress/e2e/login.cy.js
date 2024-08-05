@@ -7,6 +7,7 @@ describe('My Account - Login', () => {
 
   it('Login with valid username and password', () => {
     myAccountPage.login("chungnd@id.vn","AutomationTest@1991")
+    myAccountPage.verifyLoginSuccessful();
   });
 
   it('Login with incorrect username and incorrect password', () => {
@@ -32,6 +33,5 @@ describe('My Account - Login', () => {
     myAccountPage.login("","")
     myAccountPage.verifyTextErrorMessage(expectedMessage);
   });
-
 
 })

@@ -6,14 +6,21 @@ class MyAccountPage {
     };
 
     registerForm={
-        txtEmail:() => cy.get('input#email'),
-        txtPassword:() =>cy.get('input#password'),
+        txtEmail:() => cy.get('input#reg_email'),
+        txtPassword:() =>cy.get('input#reg_password'),
         btnRegister:() => cy.get('input[value="Register"]'),
     };
 
     errorWarning = {
         textError:() => cy.get('ul.woocommerce-error li'),
     }
+
+    myAccountNavigation = {
+        linkDashboard:() => cy.get('nav.woocommerce-MyAccount-navigation ul li a').contains("Dashboard"),
+        linkOrders:() => cy.get('nav.woocommerce-MyAccount-navigation ul li a').contains("Orders"),
+        linkLogout:() => cy.get('nav.woocommerce-MyAccount-navigation ul li a').contains("Logout"),
+
+    };
 
     login(username,password){
         if (username !== ''){
@@ -28,14 +35,22 @@ class MyAccountPage {
     };
 
     register(email,password){
-        this.registerForm.txtEmail().type(email);
-        this.registerForm.txtPassword().type(password);
+        if (email !== ''){
+            this.registerForm.txtEmail().type(email);
+        }
+        if (password !== ''){
+            this.registerForm.txtPassword().type(password);
+        }
         this.loginForm.btnRegister().click();
     };
 
     verifyTextErrorMessage(message){
         this.errorWarning.textError().should('have.text', message);
-     };
+    };
+
+    verifyLoginSuccessful(){
+        this.myAccountNavigation.linkLogout().should('be.visible');
+    }
 }
 
 module.exports = new MyAccountPage();
