@@ -16,3 +16,4 @@ modules.xml
 vcs.xml
 node_modules
 cypress/screenshots
+cypress/downloads
