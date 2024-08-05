@@ -8,12 +8,12 @@ describe('My Account - Registration', () => {
         cy.visit('/my-account');
     });
 
-    it('Registration - Sign in', () => {
+    it('1. Registration - Sign in', () => {
         // myAccountPage.register("","");
     });
 
     regData.forEach((data) => {
-        it(data.tc_name, () => {
+        it(`${data.tc_id}. ${data.tc_name}`, () => {
             myAccountPage.register(data.email,data.password);
             myAccountPage.verifyTextErrorMessage(data.message);
         });
