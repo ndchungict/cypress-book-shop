@@ -1,0 +1,17 @@
+.gradle
+.idea
+target
+.settings
+*.iml
+.classpath
+.project
+.vscode
+gradle
+gradlew
+gradlew.bat
+history
+build
+bin
+modules.xml
+vcs.xml
+node_modules
