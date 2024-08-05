@@ -31,7 +31,12 @@ class MyAccountPage {
             this.loginForm.txtPassword().type(password);
         }
 
-        this.loginForm.btnLogin().click();
+        this.loginForm.btnLogin().click({force: true});
+
+    };
+
+    logout(){
+      this.myAccountNavigation.linkLogout().click();
     };
 
     register(email,password){
@@ -50,6 +55,12 @@ class MyAccountPage {
 
     verifyLoginSuccessful(){
         this.myAccountNavigation.linkLogout().should('be.visible');
+    }
+
+    verifyLoginFromDisplayed(){
+        cy.go('back');
+        this.loginForm.btnLogin().should('be.visible');
+        cy.contains("Logout").should("not.exist");
     }
 }
 
