@@ -57,7 +57,7 @@ class MyAccountPage {
         this.myAccountNavigation.linkLogout().should('be.visible');
     }
 
-    verifyLoginFromDisplayed(){
+    verifyLoginFormDisplayed(){
         cy.go('back');
         this.loginForm.btnLogin().should('be.visible');
         cy.contains("Logout").should("not.exist");

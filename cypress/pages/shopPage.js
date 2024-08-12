@@ -1,3 +1,5 @@
+const {faker} = require("@faker-js/faker");
+
 class ShopPage {
     filterWidget ={
         btnFilter:() => cy.get('button[type="submit"]').contains('Filter'),
@@ -6,7 +8,13 @@ class ShopPage {
     };
 
     products={
+        link:() => cy.get('a.woocommerce-LoopProduct-link'),
+        name:() => this.products.link().find('h3'),
         price:()=>cy.get('span.price').find('span.woocommerce-Price-amount').parent().not('del').find('span.woocommerce-Price-amount'),
+    }
+
+    ddlSort(){
+        return cy.get('form.woocommerce-ordering select');
     }
 
     filterByPrice(minPrice,maxPrice){
@@ -23,5 +31,21 @@ class ShopPage {
             expect(maxPrice).to.gte(price);
         });
     };
+
+    clickAnyOfProductLinks(){
+        this.products.link().then(($el)=> {
+            let rd= faker.number.int($el.length-1);
+            cy.wrap($el[rd]).click();
+        })
+    }
+
+    selectSort = {
+        byDefault: () => this.ddlSort().select('menu_order'),
+        byPopularity:() => this.ddlSort().select('popularity'),
+        byAverageRating:() => this.ddlSort().select('rating'),
+        byNewness:() => this.ddlSort().select('date'),
+        byPriceLowToHigh:() => this.ddlSort().select('price'),
+        byPriceHighToLow:() => this.ddlSort().select('price-desc'),
+    }
 }
 module.exports = new ShopPage();
