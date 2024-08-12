@@ -49,6 +49,6 @@ describe('My Account - Login', () => {
     myAccountPage.login("chungnd@id.vn","AutomationTest@1991")
     myAccountPage.verifyLoginSuccessful();
     myAccountPage.logout();
-    myAccountPage.verifyLoginFromDisplayed();
+    myAccountPage.verifyLoginFormDisplayed();
   });
 })
