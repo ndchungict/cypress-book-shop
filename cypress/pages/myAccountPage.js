@@ -30,6 +30,24 @@ class MyAccountPage {
         txtEmail:() => cy.get('input#reg_email'),
         txtPassword:() =>cy.get('input#reg_password'),
         btnRegister:() => cy.get('input[value="Register"]'),
+        inputEmail:(email) => {
+            if (email !== ''){
+                this.registerForm.txtEmail().type(email);
+            }
+        },
+        inputPassword:(password) => {
+            if (password !== ''){
+                this.registerForm.txtPassword().type(password);
+            }
+        },
+        clickOnRegisterButton:() =>{
+            this.registerForm.btnRegister().click();
+        },
+        register:(email,password) =>{
+            this.registerForm.inputEmail(email);
+            this.registerForm.inputPassword(email);
+            this.registerForm.clickOnRegisterButton();
+        }
     };
 
     errorWarning = {
@@ -47,15 +65,7 @@ class MyAccountPage {
         clickOnLogoutLink:() => this.myAccountNavigation.linkLogout().click({ force: true }),
     };
 
-    register(email,password){
-        if (email !== ''){
-            this.registerForm.txtEmail().type(email);
-        }
-        if (password !== ''){
-            this.registerForm.txtPassword().type(password);
-        }
-        this.registerForm.btnRegister().click();
-    };
+
 }
 
 module.exports = new MyAccountPage();

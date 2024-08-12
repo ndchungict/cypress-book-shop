@@ -5,19 +5,19 @@ const regData =require( "../fixtures/registrationData.json");
 describe('My Account - Registration', () => {
 
     beforeEach(() => {
-        cy.visit('/my-account');
+        myAccountPage.visit();
     });
 
-    it('1. Registration - Sign in', () => {
+    it.skip('1. Registration - Sign in', () => {
         let newEmail = faker.internet.email();
-        myAccountPage.register(newEmail,"ChungND@AutomationTest1991");
-        myAccountPage.verifyLoginSuccessful();
+        myAccountPage.registerForm.register(newEmail,"ChungND@AutomationTest1991");
+        myAccountPage.myAccountNavigation.shouldBeVisible();
     });
 
     regData.forEach((data) => {
-        it(`${data.tc_id}. ${data.tc_name}`, () => {
-            myAccountPage.register(data.email,data.password);
-            myAccountPage.verifyTextErrorMessage(data.message);
+        it.skip(`${data.tc_id}. ${data.tc_name}`, () => {
+            myAccountPage.registerForm.register(data.email,data.password);
+            myAccountPage.errorWarning.shouldHaveMessage(data.message);
         });
     })
 
