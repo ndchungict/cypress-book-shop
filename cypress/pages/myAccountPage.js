@@ -1,3 +1,5 @@
+const {faker} = require("@faker-js/faker");
+
 class MyAccountPage {
     visit(){
         cy.visit('/my-account');
@@ -62,9 +64,28 @@ class MyAccountPage {
         linkDashboard:() => cy.get('nav.woocommerce-MyAccount-navigation ul li a').contains("Dashboard"),
         linkOrders:() => cy.get('nav.woocommerce-MyAccount-navigation ul li a').contains("Orders"),
         linkLogout:() => cy.get('nav.woocommerce-MyAccount-navigation ul li a').contains("Logout"),
+        clickOnOrdersLink:() => this.myAccountNavigation.linkOrders().click({ force: true }),
         clickOnLogoutLink:() => this.myAccountNavigation.linkLogout().click({ force: true }),
     };
 
+    orders = {
+        shouldBeVisible:() => cy.get('table.woocommerce-MyAccount-orders').should('be.visible'),
+        btnView:() => cy.get('td.order-actions a').contains('View'),
+        clickOnAnyViewButton:() => {
+            this.orders.btnView().then(($el)=>{
+                let rd = faker.number.int($el.length-1);
+                cy.wrap($el[rd]).click();
+            });
+        },
+    }
+
+    orderDetails = {
+        willBeShown:() => {
+            cy.get('table.order_details').should('be.visible');
+            cy.get('table.customer_details').should('be.visible');
+            cy.get('h3').contains('Billing Address').should('be.visible');
+        },
+    }
 
 }
 
