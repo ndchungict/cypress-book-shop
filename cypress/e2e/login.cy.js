@@ -2,36 +2,36 @@ import myAccountPage from "../pages/myAccountPage";
 
 describe('My Account - Login', () => {
   beforeEach('Open My Account Page',()=>{
-    cy.visit('/my-account');
+    myAccountPage.visit();
   });
 
   it('1. Login with valid username and password', () => {
-    myAccountPage.login("chungnd@id.vn","AutomationTest@1991")
-    myAccountPage.verifyLoginSuccessful();
+    myAccountPage.loginForm.login("chungnd@id.vn","AutomationTest@1991")
+    myAccountPage.myAccountNavigation.shouldBeVisible();
   });
 
   it('2. Login with incorrect username and incorrect password', () => {
     let expectedMessage = 'Error: The username incorrectUS is not registered on this site. If you are unsure of your username, try your email address instead.';
-    myAccountPage.login("incorrectUS","AutomationTest@1991")
-    myAccountPage.verifyTextErrorMessage(expectedMessage);
+    myAccountPage.loginForm.login("incorrectUS","AutomationTest@1991")
+    myAccountPage.errorWarning.shouldHaveMessage(expectedMessage);
   });
 
   it('3. Login with correct username and empty password',()=>{
     let expectedMessage = 'Error: Password is required.';
-    myAccountPage.login("chungnd@id.vn","")
-    myAccountPage.verifyTextErrorMessage(expectedMessage);
+    myAccountPage.loginForm.login("chungnd@id.vn","")
+    myAccountPage.errorWarning.shouldHaveMessage(expectedMessage);
   });
 
   it('4. Login with empty username and valid password',()=>{
     let expectedMessage = 'Error: Username is required.';
-    myAccountPage.login("","AutomationTest@1991")
-    myAccountPage.verifyTextErrorMessage(expectedMessage);
+    myAccountPage.loginForm.login("","AutomationTest@1991")
+    myAccountPage.errorWarning.shouldHaveMessage(expectedMessage);
   });
 
   it('5. Login with empty username and empty password',()=>{
     let expectedMessage = 'Error: Username is required.';
-    myAccountPage.login("","")
-    myAccountPage.verifyTextErrorMessage(expectedMessage);
+    myAccountPage.loginForm.login("","")
+    myAccountPage.errorWarning.shouldHaveMessage(expectedMessage);
   });
 
   it('6. Login password should be mask',()=>{
@@ -41,14 +41,14 @@ describe('My Account - Login', () => {
 
   it('7. Login-Handles case sensitive',()=>{
     let expectedMessage = 'Error: The password you entered for the username CHUNGND@ID.VN is incorrect. Lost your password?';
-    myAccountPage.login("CHUNGND@ID.VN","AUTOMATIONTEST@1991")
-    myAccountPage.verifyTextErrorMessage(expectedMessage);
+    myAccountPage.loginForm.login("CHUNGND@ID.VN","AUTOMATIONTEST@1991")
+    myAccountPage.errorWarning.shouldHaveMessage(expectedMessage);
   });
 
   it('8. Login-Authentication',()=>{
-    myAccountPage.login("chungnd@id.vn","AutomationTest@1991")
-    myAccountPage.verifyLoginSuccessful();
-    myAccountPage.logout();
-    myAccountPage.verifyLoginFormDisplayed();
+    myAccountPage.loginForm.login("chungnd@id.vn","AutomationTest@1991")
+    myAccountPage.myAccountNavigation.shouldBeVisible();
+    myAccountPage.myAccountNavigation.clickOnLogoutLink();
+    myAccountPage.loginForm.shouldBeDisplayed();
   });
 })
