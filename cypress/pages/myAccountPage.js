@@ -70,22 +70,38 @@ class MyAccountPage {
 
     orders = {
         shouldBeVisible:() => cy.get('table.woocommerce-MyAccount-orders').should('be.visible'),
+        orderNumber:() =>cy.get('td.order-number a'),
+        orderDate:() =>cy.get('td.order-date time'),
+        orderStatus:() =>cy.get('td.order-status'),
         btnView:() => cy.get('td.order-actions a').contains('View'),
-        clickOnAnyViewButton:() => {
+        clickOnAnyViewButton(){
             this.orders.btnView().then(($el)=>{
                 let rd = faker.number.int($el.length-1);
+                let num = '';
+                this.orders.orderNumber().eq(rd).then(($el2)=>{
+                    num = $el2.text();
+                });
+                this.orders.orderDate().eq(rd).invoke('text').as('orderDate');
+                this.orders.orderStatus().eq(rd).invoke('text').as('orderStatus');
+                cy.log("Choose order: "+ num);
                 cy.wrap($el[rd]).click();
             });
         },
+
     }
 
     orderDetails = {
+        orderNumber:() =>cy.get('mark.order-number'),
+        orderDate:() =>cy.get('mark.order-date'),
+        orderStatus:() =>cy.get('mark.order-status'),
         willBeShown:() => {
             cy.get('table.order_details').should('be.visible');
             cy.get('table.customer_details').should('be.visible');
             cy.get('h3').contains('Billing Address').should('be.visible');
         },
     }
+
+
 
 }
 

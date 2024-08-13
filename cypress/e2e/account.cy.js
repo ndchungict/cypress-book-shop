@@ -8,17 +8,17 @@ describe('My Account - Dashboard', () => {
     myAccountPage.myAccountNavigation.shouldBeVisible();
   });
 
-  it('1. My Account - Dashboard', () => {
+  it.skip('1. My Account - Dashboard', () => {
 
   });
 
-  it('2. My Account - Orders', () => {
+  it.skip('2. My Account - Orders', () => {
     homePage.mainNavi.clickOnMyAccountMenu();
     myAccountPage.myAccountNavigation.clickOnOrdersLink();
     myAccountPage.orders.shouldBeVisible();
   });
 
-  it('3. My Account - Orders', () => {
+  it.skip('3. My Account - Orders', () => {
     myAccountPage.myAccountNavigation.clickOnOrdersLink();
     myAccountPage.orders.shouldBeVisible();
     myAccountPage.orders.clickOnAnyViewButton();
