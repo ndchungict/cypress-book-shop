@@ -49,6 +49,7 @@ describe('My Account - Login', () => {
     myAccountPage.loginForm.login("chungnd@id.vn","AutomationTest@1991")
     myAccountPage.myAccountNavigation.shouldBeVisible();
     myAccountPage.myAccountNavigation.clickOnLogoutLink();
+    cy.go('back');
     myAccountPage.loginForm.shouldBeDisplayed();
   });
 })

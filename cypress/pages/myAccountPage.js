@@ -22,7 +22,6 @@ class MyAccountPage {
 
         },
         shouldBeDisplayed:()=>{
-            cy.go('back');
             this.loginForm.btnLogin().should('be.visible');
             cy.contains("Logout").should("not.exist");
         }
@@ -61,10 +60,11 @@ class MyAccountPage {
 
     myAccountNavigation = {
         shouldBeVisible:() => cy.get('nav.woocommerce-MyAccount-navigation').should('be.visible'),
-        linkDashboard:() => cy.get('nav.woocommerce-MyAccount-navigation ul li a').contains("Dashboard"),
-        linkOrders:() => cy.get('nav.woocommerce-MyAccount-navigation ul li a').contains("Orders"),
         linkLogout:() => cy.get('nav.woocommerce-MyAccount-navigation ul li a').contains("Logout"),
+        clickOnDashboardLink:() => cy.get('nav.woocommerce-MyAccount-navigation ul li a').contains("Dashboard"),
         clickOnOrdersLink:() => cy.get('nav.woocommerce-MyAccount-navigation ul li a').contains("Orders").click(),
+        clickOnAddressLink:() => cy.get('nav.woocommerce-MyAccount-navigation ul li a').contains("Addresses").click(),
+        clickOnAccountDetailsLink:() => cy.get('nav.woocommerce-MyAccount-navigation ul li a').contains("Account Details").click(),
         clickOnLogoutLink:() => this.myAccountNavigation.linkLogout().click({ force: true }),
     };
 
@@ -110,10 +110,22 @@ class MyAccountPage {
                 cy.get('@orderStatus').should('have.text',$el.text());
             });
         },
-
     }
 
+    address = {
+        linkEditBillingAddress:() => cy.get('a.edit[href*="billing"]'),
+        linkEditShippingAddress:() => cy.get('a.edit[href*="shipping"]'),
+        showBillingAndShippingAddress:() =>{
+            this.address.linkEditBillingAddress().should('be.visible');
+            this.address.linkEditShippingAddress().should('be.visible');
+        },
+        clickOnLinkEditShippingAddress:() => this.address.linkEditShippingAddress().click({ force: true }),
+        clickOnLinkEditBillingAddress:() => this.address.linkEditBillingAddress().click({ force: true }),
+    }
 
+    accountDetails = {
+        showEditAccountForm:() => cy.get('.woocommerce-EditAccountForm').should('be.visible'),
+    }
 
 }
 
