@@ -29,5 +29,9 @@ describe('My Account - Dashboard', () => {
     myAccountPage.myAccountNavigation.clickOnOrdersLink();
     myAccountPage.orders.shouldBeVisible();
     myAccountPage.orders.clickOnAnyViewButton();
+    myAccountPage.orderDetails.willBeShown();
+    myAccountPage.orderDetails.verifyOderNumber();
+    myAccountPage.orderDetails.verifyOrderDate();
+    myAccountPage.orderDetails.verifyOrderStatus();
   })
 })

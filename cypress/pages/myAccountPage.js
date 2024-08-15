@@ -64,7 +64,7 @@ class MyAccountPage {
         linkDashboard:() => cy.get('nav.woocommerce-MyAccount-navigation ul li a').contains("Dashboard"),
         linkOrders:() => cy.get('nav.woocommerce-MyAccount-navigation ul li a').contains("Orders"),
         linkLogout:() => cy.get('nav.woocommerce-MyAccount-navigation ul li a').contains("Logout"),
-        clickOnOrdersLink:() => this.myAccountNavigation.linkOrders().click({ force: true }),
+        clickOnOrdersLink:() => cy.get('nav.woocommerce-MyAccount-navigation ul li a').contains("Orders").click(),
         clickOnLogoutLink:() => this.myAccountNavigation.linkLogout().click({ force: true }),
     };
 
@@ -74,16 +74,12 @@ class MyAccountPage {
         orderDate:() =>cy.get('td.order-date time'),
         orderStatus:() =>cy.get('td.order-status'),
         btnView:() => cy.get('td.order-actions a').contains('View'),
-        clickOnAnyViewButton(){
+        clickOnAnyViewButton:()=>{
             this.orders.btnView().then(($el)=>{
                 let rd = faker.number.int($el.length-1);
-                let num = '';
-                this.orders.orderNumber().eq(rd).then(($el2)=>{
-                    num = $el2.text();
-                });
-                this.orders.orderDate().eq(rd).invoke('text').as('orderDate');
-                this.orders.orderStatus().eq(rd).invoke('text').as('orderStatus');
-                cy.log("Choose order: "+ num);
+                this.orders.orderNumber().eq(rd).as('orderNumber');
+                this.orders.orderDate().eq(rd).as('orderDate');
+                this.orders.orderStatus().eq(rd).as('orderStatus');
                 cy.wrap($el[rd]).click();
             });
         },
@@ -99,6 +95,22 @@ class MyAccountPage {
             cy.get('table.customer_details').should('be.visible');
             cy.get('h3').contains('Billing Address').should('be.visible');
         },
+        verifyOderNumber:() =>{
+            this.orderDetails.orderNumber().then(($el)=>{
+                cy.get('@orderNumber').should('have.text',$el.text());
+            });
+        },
+        verifyOrderDate:() =>{
+            this.orderDetails.orderDate().then(($el)=>{
+                cy.get('@orderDate').should('have.text',$el.text());
+            });
+        },
+        verifyOrderStatus:() =>{
+            this.orderDetails.orderStatus().then(($el)=>{
+                cy.get('@orderStatus').should('have.text',$el.text());
+            });
+        },
+
     }
 
 
