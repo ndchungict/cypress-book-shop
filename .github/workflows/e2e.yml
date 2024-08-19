@@ -6,6 +6,8 @@ jobs:
   cypress-run:
     runs-on: ubuntu-22.04
     steps:
+      - name: export enviroment variable
+        run: export NODE_TLS_REJECT_UNAUTHORIZED=0
       - name: Install and run test
         uses: actions/checkout@v4
       # Install npm dependencies, cache them correctly
