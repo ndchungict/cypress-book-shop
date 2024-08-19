@@ -1,6 +1,7 @@
 {
   "devDependencies": {
     "@faker-js/faker": "^8.4.1",
+    "@reportportal/agent-js-cypress": "^5.3.3",
     "cypress": "^13.13.2",
     "cypress-tags": "^1.2.2"
   },
