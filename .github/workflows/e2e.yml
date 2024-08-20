@@ -1,15 +1,12 @@
 name: Cypress E2E Tests
 
 on:
-  push:
-    branches:
-      - "develop"
   pull_request:
     branches:
       - "main"
 
   schedule:
-    - cron: "*/5 * * * *"
+    - cron: "0 5 * * 0"
 
 jobs:
   cypress-run:
