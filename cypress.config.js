@@ -4,20 +4,20 @@ const registerReportPortalPlugin = require('@reportportal/agent-js-cypress/lib/p
 module.exports = defineConfig({
   reporter: '@reportportal/agent-js-cypress',
   reporterOptions: {
-    apiKey: 'ChungND_au2FMtPAQ9iH3VA2cke0BdQraI3BILdxgRUeLopSM9QjrcF1F5Lkc6egJZ5cfhb_',
-    endpoint: 'https://demo.reportportal.io',
+    apiKey: 'ChungND_jt6ggPxuSxaG_PlrY59FQJb1Now375Bc9nCUhFHkKCt42ls1mgKVoOGnaDPn_laU',
+    endpoint: 'https://demo.reportportal.io/api/v1',
     project: 'ndchungict_personal',
-    launch: 'MyLaunch',
-    description: 'Your first launch description',
-    // attributes: [
-    //   {
-    //     key: 'attributeKey',
-    //     value: 'attributeValue',
-    //   },
-    //   {
-    //     value: 'anotherAttributeValue',
-    //   },
-    // ],
+    launch: 'CypressE2E',
+    description: 'Cypress E2E Launch',
+    attributes: [
+      {
+        key: 'browser',
+        value: 'chrome',
+      },
+      {
+        value: 'cypress',
+      },
+    ],
   },
   e2e: {
     setupNodeEvents(on, config) {
