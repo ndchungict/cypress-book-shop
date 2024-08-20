@@ -15,7 +15,7 @@ describe('My Account - Registration', () => {
     });
 
     regData.forEach((data) => {
-        it.skip(`${data.tc_id}. ${data.tc_name}`, () => {
+        it(`${data.tc_id}. ${data.tc_name}`, () => {
             myAccountPage.registerForm.register(data.email,data.password);
             myAccountPage.errorWarning.shouldHaveMessage(data.message);
         });
